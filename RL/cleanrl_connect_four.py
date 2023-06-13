@@ -139,7 +139,7 @@ poetry run pip install "stable_baselines3==2.0.0a1" "gymnasium[atari,accept-rom-
         epsilon = linear_schedule(args.start_e, args.end_e, args.exploration_fraction * args.total_timesteps, global_step)
         for agent in env.agent_iter():
             if random.random() < epsilon:
-                actions = np.array(env.action_space(agent).sample(action_mask))
+                actions = env.action_space(agent).sample(action_mask)
             else:
                 obs_in = torch.unsqueeze(torch.Tensor(obs).to(device), 0)
                 q_values = q_network(obs_in)
