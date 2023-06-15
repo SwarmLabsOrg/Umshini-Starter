@@ -96,6 +96,7 @@ poetry run pip install "stable_baselines3==2.0.0a1" "gymnasium[atari,accept-rom-
         )
     args = parse_args()
     run_name = f"{args.exp_name}__{args.seed}__{int(time.time())}"
+    os.mkdir(f"runs/{run_name}")
 
     # TRY NOT TO MODIFY: seeding
     random.seed(args.seed)

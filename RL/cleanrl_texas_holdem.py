@@ -11,7 +11,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 from stable_baselines3.common.buffers import ReplayBuffer
-from torch.utils.tensorboard import SummaryWriter
 
 from pettingzoo.classic import texas_holdem_no_limit_v6
 
@@ -99,11 +98,7 @@ poetry run pip install "stable_baselines3==2.0.0a1" "gymnasium[atari,accept-rom-
         )
     args = parse_args()
     run_name = f"{args.exp_name}__{args.seed}__{int(time.time())}"
-    writer = SummaryWriter(f"runs/{run_name}")
-    writer.add_text(
-        "hyperparameters",
-        "|param|value|\n|-|-|\n%s" % ("\n".join([f"|{key}|{value}|" for key, value in vars(args).items()])),
-    )
+    os.mkdir(f"runs/{run_name}")
 
     # TRY NOT TO MODIFY: seeding
     random.seed(args.seed)
@@ -204,4 +199,3 @@ poetry run pip install "stable_baselines3==2.0.0a1" "gymnasium[atari,accept-rom-
         print(f"model saved to {model_path}")
 
     env.close()
-    writer.close()
