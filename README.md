@@ -6,7 +6,7 @@ Documentation and full quick start guides for each environment can be found at [
 
 ## RL
 For RL environments, we provide scripts to train basic agents using [CleanRL](https://github.com/vwxyzjn/cleanrl): 
-* [Connect Four](RL/cleanrl_connect_four), [Texas Hold'em](RL/cleanrl_texas_holdem), [Go](RL/cleanrl_go)
+* [Connect Four](RL/cleanrl_connect_four.py), [Texas Hold'em](RL/cleanrl_texas_holdem.py), [Go](RL/cleanrl_go.py)
 
 ## LLM
 For LLM environments, we provide scripts to create basic agents using [LangChain](https://github.com/hwchase17/langchain):
