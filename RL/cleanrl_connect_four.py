@@ -10,9 +10,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
+from pettingzoo.classic import connect_four_v3
 from stable_baselines3.common.buffers import ReplayBuffer
 
-from pettingzoo.classic import connect_four_v3
 
 def parse_args():
     # fmt: off
@@ -72,7 +72,7 @@ class QNetwork(nn.Module):
             nn.ReLU(),
             nn.Linear(512, 256),
             nn.ReLU(),
-            nn.Linear(256, env.action_space('player_0').n),
+            nn.Linear(256, env.action_space("player_0").n),
         )
 
     def forward(self, x):
@@ -91,7 +91,7 @@ if __name__ == "__main__":
         raise ValueError(
             """Ongoing migration: run the following command to install the new dependencies:
 
-poetry run pip install "stable_baselines3==2.0.0a1" "gymnasium[atari,accept-rom-license]==0.28.1"  "ale-py==0.8.1" 
+poetry run pip install "stable_baselines3==2.0.0a1" "gymnasium[atari,accept-rom-license]==0.28.1"  "ale-py==0.8.1"
 """
         )
     args = parse_args()
@@ -135,7 +135,12 @@ poetry run pip install "stable_baselines3==2.0.0a1" "gymnasium[atari,accept-rom-
         if global_step % 1000 == 0:
             print("global step", global_step)
         # ALGO LOGIC: put action logic here
-        epsilon = linear_schedule(args.start_e, args.end_e, args.exploration_fraction * args.total_timesteps, global_step)
+        epsilon = linear_schedule(
+            args.start_e,
+            args.end_e,
+            args.exploration_fraction * args.total_timesteps,
+            global_step,
+        )
         for agent in env.agent_iter():
             if random.random() < epsilon:
                 actions = env.action_space(agent).sample(action_mask)
@@ -168,7 +173,9 @@ poetry run pip install "stable_baselines3==2.0.0a1" "gymnasium[atari,accept-rom-
                 data = rb.sample(args.batch_size)
                 with torch.no_grad():
                     target_max, _ = target_network(data.next_observations).max(dim=1)
-                    td_target = data.rewards.flatten() + args.gamma * target_max * (1 - data.dones.flatten())
+                    td_target = data.rewards.flatten() + args.gamma * target_max * (
+                        1 - data.dones.flatten()
+                    )
                 old_val = q_network(data.observations).gather(1, data.actions).squeeze()
                 loss = F.mse_loss(td_target, old_val)
 
@@ -177,7 +184,11 @@ poetry run pip install "stable_baselines3==2.0.0a1" "gymnasium[atari,accept-rom-
                     print("losses/td_loss", loss, global_step)
                     print("losses/q_values", old_val.mean().item(), global_step)
                     print("SPS:", int(global_step / (time.time() - start_time)))
-                    print("charts/SPS", int(global_step / (time.time() - start_time)), global_step)
+                    print(
+                        "charts/SPS",
+                        int(global_step / (time.time() - start_time)),
+                        global_step,
+                    )
 
                 # optimize the model
                 optimizer.zero_grad()
@@ -186,9 +197,12 @@ poetry run pip install "stable_baselines3==2.0.0a1" "gymnasium[atari,accept-rom-
 
             # update target network
             if global_step % args.target_network_frequency == 0:
-                for target_network_param, q_network_param in zip(target_network.parameters(), q_network.parameters()):
+                for target_network_param, q_network_param in zip(
+                    target_network.parameters(), q_network.parameters()
+                ):
                     target_network_param.data.copy_(
-                        args.tau * q_network_param.data + (1.0 - args.tau) * target_network_param.data
+                        args.tau * q_network_param.data
+                        + (1.0 - args.tau) * target_network_param.data
                     )
 
     if args.save_model:

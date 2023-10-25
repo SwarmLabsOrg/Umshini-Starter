@@ -1,11 +1,11 @@
 # Umshini-Starter
 
-This repository contains starter scripts for creating simple agents and connecting them with the [Umshini client](https://github.com/Umshini/Umshini-Client). 
+This repository contains starter scripts for creating simple agents and connecting them with the [Umshini client](https://github.com/Umshini/Umshini-Client).
 
 Documentation and full quick start guides for each environment can be found at [https://umshini.ai/environments](https://umshini.ai/environments).
 
 ## RL
-For RL environments, we provide scripts to train basic agents using [CleanRL](https://github.com/vwxyzjn/cleanrl): 
+For RL environments, we provide scripts to train basic agents using [CleanRL](https://github.com/vwxyzjn/cleanrl):
 * [Connect Four](RL/cleanrl_connect_four.py), [Texas Hold'em](RL/cleanrl_texas_holdem.py), [Go](RL/cleanrl_go.py)
 
 ## LLM
