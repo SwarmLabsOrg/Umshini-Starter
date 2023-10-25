@@ -1,12 +1,12 @@
-from umshini import connect
 import numpy as np
 import torch
-from torch import nn
-
 from pettingzoo.classic import connect_four_v3
+from torch import nn
+from umshini import connect
 
 checkpoint_path = "<YOUR_CHECKPOINT_PATH>"
 env_name = "connect_four_v3"
+
 
 class QNetwork(nn.Module):
     def __init__(self, env):
@@ -17,7 +17,7 @@ class QNetwork(nn.Module):
             nn.ReLU(),
             nn.Linear(512, 256),
             nn.ReLU(),
-            nn.Linear(256, env.action_space('player_0').n),
+            nn.Linear(256, env.action_space("player_0").n),
         )
 
     def forward(self, x):
