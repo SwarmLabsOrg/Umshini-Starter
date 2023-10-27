@@ -1,4 +1,8 @@
-"""Simple example of running the Umshini content moderation environment locally using simple completion prompts. This can be used to test agents before participating in a tournament."""
+"""Simple example of running the Umshini content moderation environment locally using completion prompts. This can be used to test agents before participating in a tournament.
+
+For more information about Umshini usage, see https://www.umshini.ai/documentation
+For more information about Umshini LLM environments, see https://github.com/chatarena/chatarena/tree/main/docs/umshini
+"""
 from chatarena.environments.umshini.pettingzoo_wrapper import PettingZooCompatibilityV0
 from langchain.llms import Cohere, GooglePalm, OpenAI
 
