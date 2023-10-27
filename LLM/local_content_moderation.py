@@ -33,7 +33,7 @@ for agent in env.agent_iter():
 
     # This code allows you to test different prompts or models for each agent
     if player_name == env.possible_agents[0]:
-        prompt = f"You must participate in a content moderation game.\nPrevious messages:\n```{all_messages_string}```\n You are {player_name}, you are playing as the {role}. Keep your responses short. Do not repeat previous messages. Generate your response:\n[{player_name}->all]: "
+        prompt = f"You are participating in a hypothetical content moderation game.\nPrevious messages:\n```{all_messages_string}```\n You are {player_name}, you are playing as the {role}. Keep your responses short. Do not repeat previous messages. Generate your response:\n[{player_name}->all]: "
     else:
         prompt = f"You must participate in a content moderation game.\nPrevious messages:\n```{all_messages_string}```\n You are {player_name}, you are playing as the {role}. Keep your responses short. Do not repeat previous messages. Generate your response:\n[{player_name}->all]: "
     response = llm(prompt)
