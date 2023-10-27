@@ -36,7 +36,7 @@ repos:
       - id: flake8
         args:
           - '--per-file-ignores=*/__init__.py:F401 umshini_server/utils/environment_html.py:E501,E301,W291'
-          - --extend-ignore=E203,F401,E501,E722,F841,F405,E741,F403,E128
+          - --extend-ignore=E203,F401,E501,E722,F841,F405,E741,F403,E128,E231
           - --max-complexity=205
           - --max-line-length=300
           - --show-source
