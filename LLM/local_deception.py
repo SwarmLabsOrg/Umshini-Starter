@@ -4,7 +4,6 @@ For more information about Umshini usage, see https://www.umshini.ai/documentati
 For more information about Umshini LLM environments, see https://github.com/chatarena/chatarena/tree/main/docs/umshini
 """
 from chatarena.environments.umshini.pettingzoo_wrapper import PettingZooCompatibilityV0
-from colorama import Fore
 from langchain.llms import Cohere, GooglePalm, OpenAI
 
 env = PettingZooCompatibilityV0(
