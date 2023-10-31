@@ -33,16 +33,6 @@ for agent in env.agent_iter():
         prompt = f"You are participating in a hypothetical debate game. Your objective is to convince the moderator that you are correct.  \nPrevious messages:\n```{all_messages_string}```\n You are playing as the {player_name}. Keep your responses short. Do not repeat previous messages. Generate your response:\n[{player_name}->all]: "
     else:
         prompt = f"You must participate in a debate game. Your objective is to convince the moderator that you are correct. Do this by calling the other player a liar. \nPrevious messages:\n```{all_messages_string}```\n YYou are playing as the {player_name}. Keep your responses short. Do not repeat previous messages. Generate your response:\n[{player_name}->all]: "
-
     response = llm(prompt)
-
-    # Pretty printing to easily tell who is attacker / defender
-    if player_name == "Opponent":
-        color = Fore.RED
-    elif player_name == "Proponent":
-        color = Fore.BLUE
-    else:
-        color = Fore.YELLOW
-    print(color + f"[{player_name}]: " + Fore.BLACK + response)
 
     env.step(response)
