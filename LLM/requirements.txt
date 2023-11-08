@@ -1,4 +1,3 @@
 chatarena[umshini]>=0.1.13
-colorama
 langchain
 umshini

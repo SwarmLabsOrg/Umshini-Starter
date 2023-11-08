@@ -2,8 +2,7 @@ import numpy as np
 import torch
 from pettingzoo.classic import connect_four_v3
 from torch import nn
-from umshini import connect
-
+import umshini
 checkpoint_path = "<YOUR_CHECKPOINT_PATH>"
 env_name = "connect_four_v3"
 
@@ -41,4 +40,4 @@ def my_pol(obs, rew, term, trunc, info):
 
 
 if __name__ == "__main__":
-    connect(env_name, "<YOUR_BOT_NAME>", "<YOUR_API_KEY>", my_pol, testing=True)
+    umshini.connect(env_name, "<YOUR_BOT_NAME>", "<YOUR_API_KEY>", my_pol, testing=True)

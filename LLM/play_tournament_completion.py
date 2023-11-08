@@ -5,13 +5,12 @@ For more information about the environment, see https://github.com/chatarena/cha
 """
 import argparse
 
-from colorama import Fore
 from langchain.llms import OpenAI
-from umshini import connect
-from umshini.envs import LLM_GAMES
+import umshini
 
 
-def my_policy(observation, reward, termination, truncation, info):
+def example_policy(observation, reward, termination, truncation, info):
+    """Example policy providing simple agents for each environment."""
     all_messages_string = info.get("all_messages_string")
     player_name = info.get("player_name")  # Name of the current player
     role = info.get("role")
@@ -30,13 +29,17 @@ def my_policy(observation, reward, termination, truncation, info):
     llm = OpenAI(model_name="gpt-3.5-turbo-instruct")
     response = llm(prompt)
 
-    if role == "attacker":
-        color = Fore.RED
-    elif role == "defender":
-        color = Fore.BLUE
-    else:
-        color = Fore.YELLOW
-    print(color + f"[{role}]" + Fore.BLACK + f"{response}")
+    print(response)
+    return response
+
+def my_policy(observation, reward, termination, truncation, info):
+    all_messages_string = info.get("all_messages_string")  # Full log of previous messages
+    player_name = info.get("player_name")  # "Agent1" or "Agent2"
+    role = info.get("role")  # "attacker" or "defender"
+
+    # Your code goes here
+    response = "Hello, world!"
+
     return response
 
 
@@ -47,9 +50,9 @@ if __name__ == "__main__":
         type=str,
         required=True,
         help="Name of the environment",
-        choices=LLM_GAMES,
+        choices=umshini.envs.LLM_GAMES,
     )
     args = parser.parse_args()
     env_name = args.env_name
 
-    connect(env_name, "<YOUR_BOT_NAME>", "<YOUR_API_KEY>", my_policy, testing=True)
+    umshini.connect(env_name, "<YOUR_BOT_NAME>", "<YOUR_API_KEY>", example_policy, testing=True)
