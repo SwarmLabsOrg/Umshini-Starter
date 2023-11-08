@@ -5,15 +5,15 @@ For more information about the environment, see https://github.com/chatarena/cha
 """
 import argparse
 
-from langchain.llms import OpenAI
 import umshini
+from langchain.llms import OpenAI
 
 
 def example_policy(observation, reward, termination, truncation, info):
     """Example policy providing simple agents for each environment."""
-    all_messages_string = info.get("all_messages_string")
-    player_name = info.get("player_name")  # Name of the current player
-    role = info.get("role")
+    all_messages_string = info.get("all_messages_string")  # Full log of previous messages
+    player_name = info.get("player_name")  # "Agent1" or "Agent2"
+    role = info.get("role")  # "attacker" or "defender"
 
     restricted_action = info.get("restricted_action")
     topic = info.get("topic")
@@ -31,6 +31,7 @@ def example_policy(observation, reward, termination, truncation, info):
 
     print(response)
     return response
+
 
 def my_policy(observation, reward, termination, truncation, info):
     all_messages_string = info.get("all_messages_string")  # Full log of previous messages

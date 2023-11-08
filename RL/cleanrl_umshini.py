@@ -1,8 +1,9 @@
 import numpy as np
 import torch
+import umshini
 from pettingzoo.classic import connect_four_v3
 from torch import nn
-import umshini
+
 checkpoint_path = "<YOUR_CHECKPOINT_PATH>"
 env_name = "connect_four_v3"
 

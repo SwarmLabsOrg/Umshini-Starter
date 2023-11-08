@@ -3,13 +3,13 @@
 For more information about Umshini usage, see https://www.umshini.ai/documentation
 For more information about Umshini LLM environments, see https://github.com/chatarena/chatarena/tree/main/docs/umshini
 """
-from chatarena.environments.umshini.pettingzoo_wrapper import PettingZooCompatibilityV0
 import langchain
+from chatarena.environments.umshini.pettingzoo_wrapper import PettingZooCompatibilityV0
+
 
 def my_policy(observation, reward, termination, truncation, info):
     all_messages_string = info.get("all_messages_string")  # Full log of previous messages
-    player_name = info.get("player_name")  # "Agent1" or "Agent2"
-    role = info.get("role")  # "attacker" or "defender"
+    player_name = info.get("player_name")  # "Opponent" or "Proponent"
 
     # Your code goes here
     response = "Hello, world!"
@@ -19,8 +19,7 @@ def my_policy(observation, reward, termination, truncation, info):
 
 def opponent_policy(observation, reward, termination, truncation, info):
     all_messages_string = info.get("all_messages_string")  # Full log of previous messages
-    player_name = info.get("player_name")  # "Agent1" or "Agent2"
-    role = info.get("role")  # "attacker" or "defender"
+    player_name = info.get("player_name")  # "Opponent" or "Proponent"
 
     # Example: use a completion model with LangChain (see https://python.langchain.com/docs/modules/model_io/models/llms/)
     llm = langchain.llms.OpenAI(model_name="gpt-3.5-turbo-instruct")
@@ -34,7 +33,11 @@ You are playing as the {player_name}. Keep your responses short. Do not repeat p
 
 
 if __name__ == "__main__":
-    env = PettingZooCompatibilityV0(env_name="debate", topic="Student loan debt should be forgiven", render_mode="human")
+    env = PettingZooCompatibilityV0(
+        env_name="debate",
+        topic="Student loan debt should be forgiven",
+        render_mode="human",
+    )
     env.reset()
 
     for agent in env.agent_iter():
@@ -50,4 +53,4 @@ if __name__ == "__main__":
                 response = opponent_policy(observation, reward, termination, truncation, info)
 
         env.step(response)
-    json_chatlog = env.close() # optional: access the full chatlog in the form of a json
+    env.close()

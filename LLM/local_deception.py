@@ -3,8 +3,9 @@
 For more information about Umshini usage, see https://www.umshini.ai/documentation
 For more information about Umshini LLM environments, see https://github.com/chatarena/chatarena/tree/main/docs/umshini
 """
-from chatarena.environments.umshini.pettingzoo_wrapper import PettingZooCompatibilityV0
 import langchain
+from chatarena.environments.umshini.pettingzoo_wrapper import PettingZooCompatibilityV0
+
 
 def my_policy(observation, reward, termination, truncation, info):
     all_messages_string = info.get("all_messages_string")  # Full log of previous messages
@@ -34,7 +35,11 @@ You are {player_name}, you are currently playing as the {role}. Keep your respon
 
 
 if __name__ == "__main__":
-    env = PettingZooCompatibilityV0(env_name="deception", restricted_action="open the door", render_mode="human", round_length=2)
+    env = PettingZooCompatibilityV0(
+        env_name="deception",
+        restricted_action="open the door",
+        render_mode="human",
+    )
     env.reset()
 
     for agent in env.agent_iter():
@@ -50,4 +55,4 @@ if __name__ == "__main__":
                 response = opponent_policy(observation, reward, termination, truncation, info)
 
         env.step(response)
-    json_chatlog = env.close() # optional: access the full chatlog in the form of a json
+    env.close()
