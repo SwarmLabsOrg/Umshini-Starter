@@ -1,4 +1,8 @@
-import numpy as np
+"""Simple example of using trained RL agents to Umshini and connecting to a live tournament.
+
+For more information about Umshini usage, see https://www.umshini.ai/documentation
+For more information about Umshini RL environments, see https://www.umshini.ai/environments
+"""
 import torch
 import umshini
 from pettingzoo.classic import connect_four_v3

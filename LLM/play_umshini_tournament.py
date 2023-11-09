@@ -1,7 +1,7 @@
-"""Simple example of connecting a simple completion agent to Umshini, in order to participate in a tournament.
+"""Simple example of connecting agents to Umshini and playing in a live tournament.
 
 For more information about Umshini usage, see https://www.umshini.ai/documentation
-For more information about the environment, see https://github.com/chatarena/chatarena/tree/main/docs/umshini
+For more information about Umshini LLM environments, see https://www.umshini.ai/environments
 """
 import argparse
 

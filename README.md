@@ -6,8 +6,12 @@ Documentation and full quick start guides for each environment can be found at [
 
 ## RL
 For RL environments, we provide scripts to train basic agents using [CleanRL](https://github.com/vwxyzjn/cleanrl):
-* [Connect Four](RL/cleanrl_connect_four.py), [Texas Hold'em](RL/cleanrl_texas_holdem.py), [Go](RL/cleanrl_go.py)
+* [Connect Four](RL/train_connect_four_cleanrl.py), [Texas Hold'em](RL/train_texas_holdem_cleanrl.py), [Go](RL/tran_go_cleanrl.py)
+
+To connect an RL agent to a live Umshini tournament, see [play_umshini_tournament.py](RL/play_umshini_tournament.py)
 
 ## LLM
-For LLM environments, we provide scripts to create basic agents using [LangChain](https://github.com/hwchase17/langchain):
+For LLM environments, we provide scripts to run local games against basic [LangChain](https://github.com/hwchase17/langchain) agents:
 * [Debate](LLM/langchain_debate.py), [Content Moderation](LLM/langchain_content_moderation), [Deception](LLM/langchain_deception.py)
+
+To connect an LLM agent to a live Umshini tournament, see [play_umshini_tournament.py](LLM/play_umshini_tournament.py)

@@ -1,4 +1,8 @@
-# docs and experiment results can be found at https://docs.cleanrl.dev/rl-algorithms/dqn/#dqn_ataripy
+"""Train an RL agent using CleanRL for the go environment.
+
+For more information about CleanRL, see https://docs.cleanrl.dev/
+For more information about Umshini RL environments, see https://www.umshini.ai/environments
+"""
 import argparse
 import os
 import random
@@ -10,7 +14,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
-from pettingzoo.classic import connect_four_v3
+from pettingzoo.classic import go_v5
 from stable_baselines3.common.buffers import ReplayBuffer
 
 
@@ -25,6 +29,8 @@ def parse_args():
         help="if toggled, `torch.backends.cudnn.deterministic=False`")
     parser.add_argument("--cuda", type=lambda x: bool(strtobool(x)), default=True, nargs="?", const=True,
         help="if toggled, cuda will be enabled by default")
+    parser.add_argument("--capture-video", type=lambda x: bool(strtobool(x)), default=False, nargs="?", const=True,
+        help="whether to capture videos of the agent performances (check out `videos` folder)")
     parser.add_argument("--save-model", type=lambda x: bool(strtobool(x)), default=True, nargs="?", const=True,
         help="whether to save model into the `runs/{run_name}` folder")
 
@@ -68,11 +74,11 @@ class QNetwork(nn.Module):
         super().__init__()
         self.network = nn.Sequential(
             nn.Flatten(),
-            nn.Linear(84, 512),
+            nn.Linear(6137, 512),
             nn.ReLU(),
             nn.Linear(512, 256),
             nn.ReLU(),
-            nn.Linear(256, env.action_space("player_0").n),
+            nn.Linear(256, env.action_space("black_0").n),
         )
 
     def forward(self, x):
@@ -107,9 +113,9 @@ poetry run pip install "stable_baselines3==2.0.0a1" "gymnasium[atari,accept-rom-
     device = torch.device("cuda" if torch.cuda.is_available() and args.cuda else "cpu")
 
     # env setup
-    env = connect_four_v3.env()
-    observation_space = env.observation_space("player_0")["observation"]
-    action_space = env.action_space("player_0")
+    env = go_v5.env()
+    observation_space = env.observation_space("black_0")["observation"]
+    action_space = env.action_space("black_0")
 
     q_network = QNetwork(env).to(device)
     optimizer = optim.Adam(q_network.parameters(), lr=args.learning_rate)
