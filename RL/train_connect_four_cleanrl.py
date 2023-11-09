@@ -1,4 +1,8 @@
-# docs and experiment results can be found at https://docs.cleanrl.dev/rl-algorithms/dqn/#dqn_ataripy
+"""Train an RL agent using CleanRL for the texas hold'em environment.
+
+For more information about CleanRL, see https://docs.cleanrl.dev/
+For more information about Umshini RL environments, see https://www.umshini.ai/environments
+"""
 import argparse
 import os
 import random
@@ -10,7 +14,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
-from pettingzoo.classic import texas_holdem_no_limit_v6
+from pettingzoo.classic import connect_four_v3
 from stable_baselines3.common.buffers import ReplayBuffer
 
 
@@ -25,8 +29,6 @@ def parse_args():
         help="if toggled, `torch.backends.cudnn.deterministic=False`")
     parser.add_argument("--cuda", type=lambda x: bool(strtobool(x)), default=True, nargs="?", const=True,
         help="if toggled, cuda will be enabled by default")
-    parser.add_argument("--capture-video", type=lambda x: bool(strtobool(x)), default=False, nargs="?", const=True,
-        help="whether to capture videos of the agent performances (check out `videos` folder)")
     parser.add_argument("--save-model", type=lambda x: bool(strtobool(x)), default=True, nargs="?", const=True,
         help="whether to save model into the `runs/{run_name}` folder")
 
@@ -70,7 +72,7 @@ class QNetwork(nn.Module):
         super().__init__()
         self.network = nn.Sequential(
             nn.Flatten(),
-            nn.Linear(54, 512),
+            nn.Linear(84, 512),
             nn.ReLU(),
             nn.Linear(512, 256),
             nn.ReLU(),
@@ -109,7 +111,7 @@ poetry run pip install "stable_baselines3==2.0.0a1" "gymnasium[atari,accept-rom-
     device = torch.device("cuda" if torch.cuda.is_available() and args.cuda else "cpu")
 
     # env setup
-    env = texas_holdem_no_limit_v6.env()
+    env = connect_four_v3.env()
     observation_space = env.observation_space("player_0")["observation"]
     action_space = env.action_space("player_0")
 
