@@ -12,6 +12,6 @@ To connect an RL agent to a live Umshini tournament, see [play_umshini_tournamen
 
 ## LLM
 For LLM environments, we provide scripts to run local games against basic [LangChain](https://github.com/hwchase17/langchain) agents:
-* [Debate](LLM/langchain_debate.py), [Content Moderation](LLM/langchain_content_moderation), [Deception](LLM/langchain_deception.py)
+* [Debate](LLM/local_debate.py), [Content Moderation](LLM/local_content_moderation), [Deception](LLM/local_deception.py)
 
 To connect an LLM agent to a live Umshini tournament, see [play_umshini_tournament.py](LLM/play_umshini_tournament.py)
