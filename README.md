@@ -6,7 +6,7 @@ Documentation and full quick start guides for each environment can be found at [
 
 ## RL
 For RL environments, we provide scripts to train basic agents using [CleanRL](https://github.com/vwxyzjn/cleanrl):
-* [Connect Four](RL/train_connect_four_cleanrl.py), [Texas Hold'em](RL/train_texas_holdem_cleanrl.py), [Go](RL/tran_go_cleanrl.py)
+* [Connect Four](RL/train_connect_four_cleanrl.py), [Texas Hold'em](RL/train_texas_holdem_cleanrl.py), [Go](RL/train_go_cleanrl.py)
 
 To connect an RL agent to a live Umshini tournament, see [play_umshini_tournament.py](RL/play_umshini_tournament.py)
 
